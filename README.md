@@ -1,6 +1,23 @@
 # LightLink
 
-LightLink is a Python-based project enabling data transfer between two computers using QR codes. The project features a simple user interface for sending and receiving files, utilizing cameras and screens for communication.
+[![Python](https://img.shields.io/badge/python-3.12-blue)]()
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
+
+Transfer files between computers using QR codes - no internet or cables required! LightLink transforms your data into a sequence of QR codes displayed on one screen and captured by another device's camera, enabling seamless file transfer without traditional connectivity methods.
+
+![Demo](assets/demo.gif)
+
+## System Requirements
+- Python 3.12 (developed and tested with this version)
+- IDE: Tested on JetBrains PyCharm
+- Hardware Requirements:
+  - Webcam
+  - Display screen
+  - Operating System: Windows (currently tested only on Windows)
+
+## Important Notes
+- Ensure no other applications are using the camera while running LightLink
+- Camera access permissions may be required on first run
 
 ---
 
@@ -22,6 +39,45 @@ LightLink showcases the use of QR codes for innovative data transfer. By breakin
 - **OpenCV**: For handling camera input and QR code detection.
 
 ---
+
+## How It Works
+
+### Data Transfer Protocol
+LightLink uses a simple yet robust protocol for transferring data through QR codes. Each QR code represents one of four types of frames:
+
+#### Frame Types and Structure
+1. **Title Frame (T)**
+   - Format: `Tfilename`
+   - Length: 39 characters
+   - Example: `Tsend_file.txt`
+   - Always has index 0
+   - Contains the name of the file being transferred
+
+2. **Content Frame (D)**
+   - Format: `Dindex|content`
+   - Length: 39 characters total
+     - Index: 1 character
+     - Content: 38 characters
+   - Example: `D1abcdefghij0123456789abcdefghij01234567`
+   - Sequential index starting from 1
+
+3. **Confirmation Frame (C)**
+   - Format: `Cindex`
+   - Length: 2 characters
+   - Example: `C0`
+   - Sent by receiver to confirm successful frame reception
+
+4. **End Frame (E)**
+   - Format: `EX`
+   - Length: 2 characters
+   - Marks the end of transmission
+
+### Frame Sequencing
+- Frame indexing starts at 0 (Title frame)
+- Content frames use sequential numbers (1,2,3...)
+- Each frame maintains a fixed length for reliable transmission
+
+  ---
 
 ## **Project Structure**
 ```
@@ -74,7 +130,9 @@ LightLink/
 ## **Example**
 Below is an example of how QR codes are used to transfer files:
 
-![Example QR Code](assets/qr_example1.png)
+![image](https://github.com/user-attachments/assets/967e70d3-dd85-45c3-b69f-1d08138f2b3f)
+
+
 
 ---
 
