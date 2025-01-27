@@ -31,11 +31,6 @@ LightLink/
 │   ├── sender.py       # Back-end logic for the sender
 │   ├── receiver.py     # Back-end logic for the receiver
 │   ├── slide.py        # Handles chunking data into QR codes
-├── assets/
-│   ├── qr_example1.png # Example QR code
-│   ├── qr_example2.png # Example QR code
-├── docs/
-│   ├── sequence_diagram.png # Sequence diagram
 ├── README.md           # Project documentation
 ├── LICENSE             # Project license
 ├── requirements.txt    # Python dependencies
